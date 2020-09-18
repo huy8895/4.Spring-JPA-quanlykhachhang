@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>editcustomer</title>
+    <title>delete customer</title>
 </head>
 <body>
-edit customer
+delete customer
 <form th:object="${customer}" method="post">
     <input type="hidden" th:field="*{id}">
     <label>First name:
@@ -16,7 +16,7 @@ edit customer
     <label>Last name:
         <input type="text" th:field="*{lastName}">
     </label>
-    <input type="submit" value="edit">
+    <input type="submit" value="delete">
 </form>
 </body>
 </html>

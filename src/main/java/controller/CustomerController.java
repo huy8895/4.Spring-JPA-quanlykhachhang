@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +37,34 @@ public class CustomerController {
         customerService.save(customer);
         return "redirect:/customers";
     }
+
+    @GetMapping("/{id}/edit")
+    public ModelAndView showEdit(@PathVariable long id){
+        ModelAndView modelAndView = new ModelAndView("/customer/edit");
+        modelAndView.addObject("customer",customerService.findById(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}/edit")
+    public String edit(Customer customer){
+        customerService.save(customer);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/{id}/delete")
+    public ModelAndView showDelete(@PathVariable long id){
+        ModelAndView modelAndView = new ModelAndView("/customer/delete");
+        modelAndView.addObject("customer",customerService.findById(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(Customer customer){
+        customerService.remove(customer.getId());
+        return "redirect:/customers";
+    }
+
+
 
 }
 

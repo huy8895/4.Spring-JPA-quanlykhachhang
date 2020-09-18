@@ -21,8 +21,8 @@ customer list
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
-            <td><a th:href="@{/customers/{id}/edit}">edit</a> </td>
-            <td><a th:href="@{/customers/{id}/delete}">delete</a> </td>
+            <td><a th:href="@{/customers/__${customer.id}__/edit}">edit</a> </td>
+            <td><a th:href="@{/customers/__${customer.id}__/delete}">delete</a> </td>
         </tr>
     </table>
 </div>
