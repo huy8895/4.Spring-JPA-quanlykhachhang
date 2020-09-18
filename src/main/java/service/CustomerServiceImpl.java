@@ -1,25 +1,33 @@
 package service;
 
+import model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import repository.ICustomerRepository;
+
 import java.util.List;
 
-public class CustomerServiceImpl implements ICustomerService<CustomerServiceImpl>{
+public class CustomerServiceImpl implements ICustomerService<Customer>{
+    @Autowired
+    ICustomerRepository customerRepository;
+
+
     @Override
-    public List<CustomerServiceImpl> findAll() {
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public Customer select(long id) {
         return null;
     }
 
     @Override
-    public CustomerServiceImpl select(long id) {
-        return null;
-    }
-
-    @Override
-    public boolean save(CustomerServiceImpl model) {
+    public boolean save(Customer model) {
         return false;
     }
 
     @Override
-    public boolean update(CustomerServiceImpl model) {
+    public boolean update(Customer model) {
         return false;
     }
 
