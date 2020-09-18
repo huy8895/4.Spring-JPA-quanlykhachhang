@@ -13,12 +13,14 @@ customer list
     <table class="table" th:object="${customers}">
         <tr>
             <th>id</th>
+            <th>avatar</th>
             <th>first name</th>
             <th>last name</th>
             <th th:colspan="2">Action</th>
         </tr>
         <tr th:each="customer: ${customers}">
             <td th:text="${customer.id}"></td>
+            <td><img th:src="@{'/i/'+ ${customer.getAvatar()}}" width="100"/></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
             <td><a th:href="@{/customers/__${customer.id}__/edit}">edit</a> </td>

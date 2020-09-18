@@ -10,6 +10,7 @@
 edit customer
 <form th:object="${customer}" method="post">
     <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{avatar}">
     <label>First name:
         <input type="text" th:field="*{firstName}">
     </label>

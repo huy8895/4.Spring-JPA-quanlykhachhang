@@ -13,12 +13,23 @@ public class Customer {
 
     private String lastName;
 
+    private String avatar;
+
     public Customer() {
     }
 
-    public Customer(String name, String address) {
+    public Customer(String name, String address,String avatar) {
         this.firstName = name;
         this.lastName = address;
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public long getId() {
