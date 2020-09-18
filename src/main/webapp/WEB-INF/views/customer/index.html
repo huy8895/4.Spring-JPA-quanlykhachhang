@@ -8,17 +8,21 @@
 </head>
 <body>
 customer list
+<a th:href="@{/customers/create}">Create New Customer</a>
 <div class="container">
     <table class="table" th:object="${customers}">
         <tr>
             <th>id</th>
             <th>first name</th>
             <th>last name</th>
+            <th th:colspan="2">Action</th>
         </tr>
         <tr th:each="customer: ${customers}">
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
+            <td><a th:href="@{/customers/{id}/edit}">edit</a> </td>
+            <td><a th:href="@{/customers/{id}/delete}">delete</a> </td>
         </tr>
     </table>
 </div>

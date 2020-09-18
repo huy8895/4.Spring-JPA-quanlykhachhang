@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService<Customer>{
     @Autowired
-    ICustomerRepository customerRepository;
+    ICustomerRepository<Customer> customerRepository;
 
 
     @Override
@@ -17,22 +17,17 @@ public class CustomerServiceImpl implements ICustomerService<Customer>{
     }
 
     @Override
-    public Customer select(long id) {
-        return null;
+    public Customer findById(long id) {
+        return customerRepository.findById(id);
     }
 
     @Override
-    public boolean save(Customer model) {
-        return false;
+    public void save(Customer model) {
+        customerRepository.save(model);
     }
 
     @Override
-    public boolean update(Customer model) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(long id) {
-        return false;
+    public void remove(long id) {
+        customerRepository.remove(id);
     }
 }

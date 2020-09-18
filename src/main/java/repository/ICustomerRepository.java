@@ -5,11 +5,9 @@ import java.util.List;
 public interface ICustomerRepository<T> {
     List<T> findAll();
 
-    T select(long id);
+    T findById(long id);
 
-    boolean save(T model);
+    void save(T model);
 
-    boolean update(T model);
-
-    boolean remove(long id);
+    void remove(long id);
 }
