@@ -5,6 +5,8 @@ import model.CustomerForm;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import service.IProvinceService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -35,11 +38,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ModelAndView show(Model model) {
-        ModelAndView modelAndView = new ModelAndView("/customer/index");
-        Iterable<Customer> customerList = customerService.findAll();
-        modelAndView.addObject("customers", customerList);
-        return modelAndView;
+    public String showList(){
+        return "redirect:customers/find";
     }
 
     @GetMapping("/create")
@@ -94,10 +94,14 @@ public class CustomerController {
     }
 
     @GetMapping("/find")
-    public ModelAndView findByName(Model model, @RequestParam String key, Pageable pageable) {
+    public ModelAndView findByName(@RequestParam("key") Optional<String> keyword,
+                                   @RequestParam("page") Optional<Integer> page,
+                                   Pageable pageable) {
+        PageRequest pageRequest = new PageRequest(page.orElse(0), 5);
         ModelAndView modelAndView = new ModelAndView("/customer/index");
-        Iterable<Customer> customerList = customerService.findAllByFirstNameContaining(key,pageable);
+        Page<Customer> customerList = customerService.findAllByFirstNameContaining(keyword.orElse(""), pageRequest);
         modelAndView.addObject("customers", customerList);
+        modelAndView.addObject("keyword",keyword.orElse(""));
         return modelAndView;
     }
 }
