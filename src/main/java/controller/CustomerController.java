@@ -62,6 +62,7 @@ public class CustomerController {
             e.printStackTrace();
         }
         Customer customer = new Customer(customerForm.getFirstName(), customerForm.getLastName(), fileName);
+        customer.setProvince(customerForm.getProvince());
         customerService.save(customer);
         return "redirect:/customers";
     }

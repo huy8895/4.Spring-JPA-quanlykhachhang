@@ -13,10 +13,12 @@
 <div class="container">
     <table class="table">
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th th:colspan="2">Action</th>
         </tr>
         <tr th:each="province: ${provinces}" >
+            <td th:text="${province.id}"></td>
             <td th:text="${province.name}"></td>
             <td><a th:href="@{/provinces/edit/__${province.id}__}">edit</a></td>
             <td><a th:href="@{/provinces/delete/__${province.id}__}">delete</a></td>
