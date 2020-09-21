@@ -1,13 +1,12 @@
 package repository;
 
-import java.util.List;
+import model.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ICustomerRepository<T> {
-    List<T> findAll();
 
-    T findById(long id);
+public interface ICustomerRepository extends PagingAndSortingRepository<Customer,Long> {
+    Page<Customer> findAllByFirstNameContaining(String firstName, Pageable pageable);
 
-    void save(T model);
-
-    void remove(long id);
 }

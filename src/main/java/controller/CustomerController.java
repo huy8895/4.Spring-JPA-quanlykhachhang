@@ -29,7 +29,7 @@ public class CustomerController {
     @GetMapping
     public ModelAndView show() {
         ModelAndView modelAndView = new ModelAndView("/customer/index");
-        List<Customer> customerList = customerService.findAll();
+        Iterable<Customer> customerList = customerService.findAll();
         modelAndView.addObject("customers", customerList);
         return modelAndView;
     }
@@ -83,7 +83,6 @@ public class CustomerController {
         customerService.remove(customer.getId());
         return "redirect:/customers";
     }
-
 
 }
 

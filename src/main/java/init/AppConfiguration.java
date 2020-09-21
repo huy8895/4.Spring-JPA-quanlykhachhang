@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -28,7 +29,6 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.CustomerRepositoryImpl;
 import repository.ICustomerRepository;
 import service.CustomerServiceImpl;
 import service.ICustomerService;
@@ -43,6 +43,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan("controller")
 @PropertySource("classpath:uploadfile.properties")
+@EnableJpaRepositories("repository")
 public class AppConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -84,10 +85,10 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         return new CustomerServiceImpl();
     }
 
-    @Bean
-    public ICustomerRepository<Customer> customerRepository() {
-        return new CustomerRepositoryImpl();
-    }
+//    @Bean
+//    public ICustomerRepository customerRepository() {
+//        return new CustomerRepositoryImpl();
+//    }
 
     @Bean
     public DataSource dataSource(){

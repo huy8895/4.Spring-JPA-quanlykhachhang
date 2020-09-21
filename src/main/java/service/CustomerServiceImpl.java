@@ -2,23 +2,23 @@ package service;
 
 import model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import repository.ICustomerRepository;
-
-import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService<Customer>{
     @Autowired
-    ICustomerRepository<Customer> customerRepository;
+    ICustomerRepository customerRepository;
 
 
     @Override
-    public List<Customer> findAll() {
+    public Iterable<Customer> findAll() {
         return customerRepository.findAll();
     }
 
     @Override
     public Customer findById(long id) {
-        return customerRepository.findById(id);
+        return customerRepository.findOne(id);
     }
 
     @Override
@@ -28,6 +28,13 @@ public class CustomerServiceImpl implements ICustomerService<Customer>{
 
     @Override
     public void remove(long id) {
-        customerRepository.remove(id);
+        customerRepository.delete(id);
     }
+
+    @Override
+    public Page<Customer> findAllByFirstNameContaining(String firstName, Pageable pageable) {
+        return customerRepository.findAllByFirstNameContaining(firstName, pageable);
+    }
+
+
 }
