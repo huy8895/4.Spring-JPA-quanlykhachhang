@@ -24,7 +24,7 @@ public class CustomerController {
     @Autowired
     private Environment environment;
     @Autowired
-    ICustomerService<Customer> customerService;
+    ICustomerService customerService;
 
     @GetMapping
     public ModelAndView show() {
@@ -83,6 +83,7 @@ public class CustomerController {
         customerService.remove(customer.getId());
         return "redirect:/customers";
     }
+
 
 }
 

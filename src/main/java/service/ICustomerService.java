@@ -4,12 +4,12 @@ import model.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface ICustomerService<T> {
+public interface ICustomerService {
     Iterable<Customer> findAll();
 
-    T findById(long id);
+    Customer findById(long id);
 
-    void save(T model);
+    void save(Customer model);
 
     void remove(long id);
 

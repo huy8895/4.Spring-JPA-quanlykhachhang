@@ -1,6 +1,5 @@
 package init;
 
-import model.Customer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,9 +28,11 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.ICustomerRepository;
 import service.CustomerServiceImpl;
 import service.ICustomerService;
+import service.IProvinceService;
+import service.ProvinceServiceImpl;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -81,8 +82,13 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
     }
 
     @Bean
-    public ICustomerService<Customer> customerService() {
+    public ICustomerService customerService() {
         return new CustomerServiceImpl();
+    }
+
+    @Bean
+    public IProvinceService provinceService() {
+        return new ProvinceServiceImpl();
     }
 
 //    @Bean

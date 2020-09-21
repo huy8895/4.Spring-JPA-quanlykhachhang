@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import repository.ICustomerRepository;
 
-public class CustomerServiceImpl implements ICustomerService<Customer>{
+public class CustomerServiceImpl implements ICustomerService{
     @Autowired
     ICustomerRepository customerRepository;
 
