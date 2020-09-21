@@ -2,17 +2,17 @@ package controller;
 
 import model.Customer;
 import model.CustomerForm;
+import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import service.ICustomerService;
+import service.IProvinceService;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +26,16 @@ public class CustomerController {
     @Autowired
     ICustomerService customerService;
 
+    @Autowired
+    IProvinceService provinceService;
+
+    @ModelAttribute("provinces")
+    public Iterable<Province> provinces(){
+        return provinceService.findAll();
+    }
+
     @GetMapping
-    public ModelAndView show() {
+    public ModelAndView show(Model model) {
         ModelAndView modelAndView = new ModelAndView("/customer/index");
         Iterable<Customer> customerList = customerService.findAll();
         modelAndView.addObject("customers", customerList);
@@ -35,7 +43,7 @@ public class CustomerController {
     }
 
     @GetMapping("/create")
-    public ModelAndView showCreate() {
+    public ModelAndView showCreate(Model model) {
         ModelAndView modelAndView = new ModelAndView("/customer/create");
         modelAndView.addObject("customerForm", new CustomerForm());
         return modelAndView;

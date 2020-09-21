@@ -9,10 +9,27 @@ public class CustomerForm {
 
     private MultipartFile avatar;
 
+    private Province province;
+
     public CustomerForm(String firstName, String lastName, MultipartFile avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatar = avatar;
+    }
+
+    public CustomerForm(String firstName, String lastName, MultipartFile avatar, Province province) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.avatar = avatar;
+        this.province = province;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
     }
 
     public CustomerForm() {

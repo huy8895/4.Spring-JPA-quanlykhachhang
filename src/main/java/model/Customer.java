@@ -15,6 +15,10 @@ public class Customer {
 
     private String avatar;
 
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
+
     public Customer() {
     }
 
@@ -22,6 +26,14 @@ public class Customer {
         this.firstName = name;
         this.lastName = address;
         this.avatar = avatar;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
     }
 
     public String getAvatar() {
