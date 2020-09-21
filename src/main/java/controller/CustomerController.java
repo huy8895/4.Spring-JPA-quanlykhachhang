@@ -5,6 +5,7 @@ import model.CustomerForm;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -16,7 +17,6 @@ import service.IProvinceService;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/customers")
@@ -93,6 +93,12 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-
+    @GetMapping("/find")
+    public ModelAndView findByName(Model model, @RequestParam String key, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/customer/index");
+        Iterable<Customer> customerList = customerService.findAllByFirstNameContaining(key,pageable);
+        modelAndView.addObject("customers", customerList);
+        return modelAndView;
+    }
 }
 
