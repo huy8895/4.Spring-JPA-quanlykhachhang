@@ -1,6 +1,7 @@
 package service;
 
 import model.Customer;
+import model.Province;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,7 @@ public interface ICustomerService {
     void remove(long id);
 
     Page<Customer> findAllByFirstNameContaining(String firstName, Pageable pageable);
+
+    Iterable<Customer> findAllByProvince(Province province);
 
 }
