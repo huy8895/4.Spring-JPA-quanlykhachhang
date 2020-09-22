@@ -8,6 +8,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -95,11 +98,12 @@ public class CustomerController {
 
     @GetMapping("/find")
     public ModelAndView findByName(@RequestParam("key") Optional<String> keyword,
-                                   @RequestParam("page") Optional<Integer> page,
-                                   Pageable pageable) {
-        PageRequest pageRequest = new PageRequest(page.orElse(0), 5);
+                                   @PageableDefault(value = 5, page = 0)
+                                   @SortDefault(sort = "firstName", direction = Sort.Direction.DESC)
+                                               Pageable pageable) {
+//        PageRequest pageRequest = new PageRequest(page.orElse(0), 5);
         ModelAndView modelAndView = new ModelAndView("/customer/index");
-        Page<Customer> customerList = customerService.findAllByFirstNameContaining(keyword.orElse(""), pageRequest);
+        Page<Customer> customerList = customerService.findAllByFirstNameContaining(keyword.orElse(""), pageable);
         modelAndView.addObject("customers", customerList);
         modelAndView.addObject("keyword",keyword.orElse(""));
         return modelAndView;
